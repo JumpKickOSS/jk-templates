@@ -34,6 +34,8 @@ One template per top-level `<name>.g8/` directory:
 | `kotlin-cli` | Simple Kotlin executable (Mill SIMPLE layout) |
 | `quarkus` | Quarkus 3.x REST application (`[quarkus]` plugin) |
 | `java-cli-native` | Interactive Java CLI with JLine (`jk native` ready) |
+| `spring-boot-webmvc` | Spring Boot WebMVC + JPA/H2 + Actuator |
+| `spring-boot-webmvc-kotlin` | Kotlin Spring Boot WebMVC + JPA/H2 + Actuator |
 
 Each template pins the latest stable framework versions at the time it was last updated;
 regenerate with `jk new` and bump pins in the generated `jk.toml` as needed.
