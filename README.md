@@ -38,6 +38,7 @@ One template per top-level `<name>.g8/` directory:
 | `spring-boot-webmvc-kotlin` | Kotlin Spring Boot WebMVC + JPA/H2 + Actuator |
 | `ktor-3` | Ktor 3 service with Koin DI and Exposed/H2 |
 | `spring-boot-mcp` | Spring Boot MCP server (Spring AI, `@Tool` over SSE) |
+| `grails-8` | Grails 8 REST app (GORM, H2, Groovy 5) |
 
 Each template pins the latest stable framework versions at the time it was last updated;
 regenerate with `jk new` and bump pins in the generated `jk.toml` as needed.
