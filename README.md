@@ -33,6 +33,7 @@ One template per top-level `<name>.g8/` directory:
 | `java-cli` | Simple Java 25 executable (Mill SIMPLE layout) |
 | `kotlin-cli` | Simple Kotlin executable (Mill SIMPLE layout) |
 | `quarkus` | Quarkus 3.x REST application (`[quarkus]` plugin) |
+| `java-cli-native` | Interactive Java CLI with JLine (`jk native` ready) |
 
 Each template pins the latest stable framework versions at the time it was last updated;
 regenerate with `jk new` and bump pins in the generated `jk.toml` as needed.
