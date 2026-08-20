@@ -4,7 +4,6 @@ group    = "$organization$"
 version  = "0.1.0"
 jdk      = "$jdk$"
 groovy   = "$groovy$"
-layout   = "traditional"
 
 [application]
 main       = "$package$.Application"
