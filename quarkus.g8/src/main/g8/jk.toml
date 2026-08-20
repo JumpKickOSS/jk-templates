@@ -2,14 +2,13 @@
 group   = "$organization$"
 name    = "$name$"
 version = "0.1.0"
-jdk     = $jdk$
-java    = $jdk$
+java    = $java$
 
 [application]
 main = "$package$.Application"
 
 [quarkus]
-version = "$quarkus_version$"
+version = "latest"
 
 [dependencies]
 quarkus-rest = { group = "io.quarkus", name = "quarkus-rest" }

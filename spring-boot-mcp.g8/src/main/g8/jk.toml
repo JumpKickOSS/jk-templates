@@ -2,18 +2,17 @@
 group   = "$organization$"
 name    = "$name$"
 version = "0.1.0"
-jdk     = $jdk$
-java    = $jdk$
+java    = $java$
 
 [application]
 main = "$package$.Application"
 
 [spring-boot]
-version = "$spring_boot$"
+version = "latest"
 
 [dependencies]
 starter-webmvc = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc" }
-mcp-server     = { group = "org.springframework.ai", name = "spring-ai-starter-mcp-server-webmvc", version = "=$spring_ai$" }
+mcp-server     = { group = "org.springframework.ai", name = "spring-ai-starter-mcp-server-webmvc", version = "latest" }
 
 [test-dependencies]
 starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }

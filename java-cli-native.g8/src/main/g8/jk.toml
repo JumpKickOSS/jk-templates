@@ -2,14 +2,13 @@
 group   = "$organization$"
 name    = "$name$"
 version = "0.1.0"
-jdk     = $jdk$
-java    = $jdk$
+java    = $java$
 
 [application]
 main = "$package$.Main"
 
 [dependencies]
-jline = { group = "org.jline", name = "jline", version = "$jline$" }
+jline = "latest"
 
 [test-dependencies]
-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version = "=5.11.4" }
+junit-jupiter = "latest"

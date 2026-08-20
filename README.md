@@ -32,17 +32,19 @@ One template per top-level `<name>.g8/` directory:
 |------|-------------|
 | `java-cli` | Simple Java 25 executable (Mill SIMPLE layout) |
 | `kotlin-cli` | Simple Kotlin executable (Mill SIMPLE layout) |
-| `quarkus` | Quarkus 3.x REST application (`[quarkus]` plugin) |
+| `quarkus` | Quarkus REST application (`[quarkus]` plugin) |
 | `java-cli-native` | Interactive Java CLI with JLine (`jk native` ready) |
 | `spring-boot-webmvc` | Spring Boot WebMVC + JPA/H2 + Actuator |
 | `spring-boot-webmvc-kotlin` | Kotlin Spring Boot WebMVC + JPA/H2 + Actuator |
-| `ktor-3` | Ktor 3 service with Koin DI and Exposed/H2 |
+| `ktor-3` | Ktor service with Koin DI and Exposed/H2 |
 | `spring-boot-mcp` | Spring Boot MCP server (Spring AI, `@Tool` over SSE) |
-| `grails-8` | Grails 8 REST app (GORM, H2, Groovy 5) |
+| `grails-8` | Grails 8 REST app (GORM, H2, Groovy) |
 | `micronaut` | Micronaut HTTP service (compile-time DI, Netty) |
 
-Each template pins the latest stable framework versions at the time it was last updated;
-regenerate with `jk new` and bump pins in the generated `jk.toml` as needed.
+Library and plugin versions in generated `jk.toml` files are `"latest"`. First
+`jk lock` pins the current stable set; `jk update` refreshes. Do not pin (or
+pseudo-pin) versions in these templates. Grails 8 is still a milestone, so that
+template floors `[grails] version` at `8.0.0-M4` until GA.
 
 ## Contributing
 
