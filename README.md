@@ -67,9 +67,12 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
 
 ## Versions
 
-Library and framework versions in generated `jk.toml` files are `"latest"`. First `jk lock` (or
-the first `jk build`) pins the current stable set; `jk update` refreshes. Do not pin (or
-pseudo-pin) versions in these templates.
+Every library and framework version a template writes is today's current stable as an exact
+pin (`[spring-boot] version = "4.1.1"`, not `"latest"`): the committed file says what the
+project builds against, and `jk update` moves it. Dependencies are spelled as catalog short
+names with a version (`h2 = "2.5.250"`) or as coordinate strings; a BOM-managed artifact is a
+versionless coordinate (`"org.springframework.boot:spring-boot-starter-webmvc"`). Inline tables
+are for the extra fields only (`optional`, `features`, `classifier`, `git`, `path`).
 
 ## Contributing
 
