@@ -15,6 +15,7 @@ and `diff -r` between the two must stay empty apart from this README and the LIC
 jk new -t cli my-tool
 jk new -t cli --lang kotlin my-tool
 jk new -t library my-lib
+jk new -t library --lang kotlin my-lib
 jk new -t ktor-3 my-svc
 jk new -t spring-boot/mcp my-mcp
 jk new -t spring-boot/webapp my-app
@@ -43,7 +44,7 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
 |------|-----------|-----------|-------------|-----------|
 | `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout) | house baseline |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
-| `library` | none | java | Published library: `@NullMarked` API package, unit test | `library` |
+| `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a resource-only `web` module, `[dev.sidecars]` runs Vite beside `jk dev` | `spring`, `monorepo` |
@@ -64,7 +65,9 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
   runnable starters.
 - **`[build-info]`** on the Spring Boot and `library` templates: the jar carries `git.properties`
   (and Boot's `META-INF/build-info.properties`, what `/actuator/info` reports) with the commit,
-  branch and version it was built from.
+  branch and version it was built from. The `library` templates also ship sources and javadoc
+  jars beside the jar — javadoc's for Java, Dokka's javadoc-format output (`[dokka] version`) for
+  Kotlin.
 - **`java = 25`** — the language level, never a `jdk =` pin.
 - **No `AGENTS.md`** — jk writes the canonical one into every new project; a copy here would shadow it.
 
