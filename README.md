@@ -62,6 +62,9 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
   runs them, so every tagged test belongs to exactly one tier.
 - **`[format] style = "standard"`**, and **`[image]`** (a JRE 25 base, `aot-cache = true`) on the
   runnable starters.
+- **`[build-info]`** on the Spring Boot and `library` templates: the jar carries `git.properties`
+  (and Boot's `META-INF/build-info.properties`, what `/actuator/info` reports) with the commit,
+  branch and version it was built from.
 - **`java = 25`** — the language level, never a `jdk =` pin.
 - **No `AGENTS.md`** — jk writes the canonical one into every new project; a copy here would shadow it.
 
