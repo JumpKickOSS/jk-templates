@@ -77,7 +77,9 @@ Every library and framework version a template writes is today's current stable 
 pin (`[spring-boot] version = "4.1.1"`, not `"latest"`): the committed file says what the
 project builds against, and `jk update` moves it. Dependencies are spelled as catalog short
 names with a version (`h2 = "2.5.250"`) or as coordinate strings; a BOM-managed artifact is a
-versionless coordinate (`"org.springframework.boot:spring-boot-starter-webmvc"`). Inline tables
+catalog short name set to `"managed"` (`kotlin-reflect = "managed"`) or, under a handle that is
+not its catalog name, a versionless coordinate
+(`starter-webmvc = "org.springframework.boot:spring-boot-starter-webmvc"`). Inline tables
 are for the extra fields only (`optional`, `features`, `classifier`, `git`, `path`).
 
 ## Contributing
