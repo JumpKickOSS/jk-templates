@@ -47,7 +47,7 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
 | `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
-| `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a resource-only `web` module, `[dev.sidecars]` runs Vite beside `jk dev` | `spring`, `monorepo` |
+| `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
 | `webmvc-security-actuator-jpa-h2` | spring-boot | java, kotlin | Spring Boot WebMVC + JPA/H2 + Actuator | `spring` |
 
 Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `micronaut/hello`,
