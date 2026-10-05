@@ -86,7 +86,8 @@ are for the extra fields only (`optional`, `features`, `classifier`, `git`, `pat
 
 Change `templates/` in the jk repository; a template must generate a project where `jk build`,
 `jk test` and `jk guard` pass with no manual edits, and keep `default.properties` minimal —
-sensible defaults, no required interaction. Then mirror the tree here.
+sensible defaults, no required interaction. Then run `scripts/templates-sync.sh` in jk, which
+mirrors `templates/` here; `--check` names any file that has drifted.
 
 ## License
 
