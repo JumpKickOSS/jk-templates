@@ -36,18 +36,18 @@ at build time (`[image]` in `app/jk.toml`).
 ## Develop
 
 ```bash
-cd app && jk dev
+jk dev
 ```
 
-`jk dev` in `app/` recompiles and restarts the JVM on change **and** runs the Vite dev server beside
-it as the `web` entry of `[dev.sidecars]`: `npm run dev` in `../web`, with `/api` proxied to `:8080`
-and hot reload for the front end. jk waits for `http://localhost:5173` to answer before printing the
-front door, prefixes the sidecar's output with `web │`, and stops both on Ctrl-C.
-`jk dev --no-sidecars` runs the app alone.
+`jk dev` at the root recompiles and restarts the JVM on change **and** runs `web`'s `dev` script
+beside it on the locked Node.js: the Vite dev server, with `/api` proxied to `:8080` and hot reload
+for the front end. jk infers it from `app`'s dependency on `web`, so there is no sidecar to declare.
+It waits for `http://localhost:5173` to answer before printing the front door, prefixes each line
+with the module that wrote it, and stops both on Ctrl-C. `jk dev -T` in `app/` runs the app alone.
 
 ## Tiers and guards
 
-`jk test` is the fast tier; `jk test --profile integration` (or `network`, `slow`, `bench`) runs the
+`jk test` is the fast tier; `jk test -p integration` (or `network`, `slow`, `bench`) runs the
 tests tagged with that cost. House rules come from the `spring` pack plus the `monorepo` pack's
 workspace-shaped rules (`jk-guards.toml`); `jk guard explain` lists them, and a failure's `Instead:`
 line says what to do.
