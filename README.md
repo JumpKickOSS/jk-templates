@@ -42,7 +42,7 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
 
 | Name | Framework | Languages | Description | Rule pack |
 |------|-----------|-----------|-------------|-----------|
-| `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout) | house baseline |
+| `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
 | `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
@@ -57,12 +57,14 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
 
 - **`jk-guards.toml`** — house rules run inside `jk build` from the first build. Framework templates
   `[guards] extends` the pack for their framework (`cc.jumpkick.guards:spring`, `library`,
-  `monorepo`, …); `none` templates carry a small baseline of their own with a `guard-fixtures/`
-  proof. `jk guard explain` lists the rules.
+  `monorepo`, …), and the Java `cli` extends `library`; the other `none` templates carry a small
+  baseline of their own with a `guard-fixtures/` proof. `jk guard explain` lists the rules.
 - **Test tiers** — `[test] exclude-tags` names the cost tags, and one `[profiles.<tag>]` per tag
   runs them, so every tagged test belongs to exactly one tier.
 - **`[format] style = "standard"`**, and **`[image]`** (a JRE 25 base, `aot-cache = true`) on the
-  runnable starters.
+  runnable JVM starters; `cli-native` has none, because its native binary ships as itself.
+- **`[nullness]`** on every Java template: each package it generates is `@NullMarked` in a
+  `package-info.java`, and NullAway checks it from the first build.
 - **`[build-info]`** on the Spring Boot and `library` templates: the jar carries `git.properties`
   (and Boot's `META-INF/build-info.properties`, what `/actuator/info` reports) with the commit,
   branch and version it was built from. The `library` templates also ship sources and javadoc

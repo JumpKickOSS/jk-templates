@@ -6,11 +6,18 @@ java = $java$
 [application]
 main = "$package$.Main"
 
+# No [image]: a native CLI ships as the binary `jk native` writes, which runs on its own; a
+# container image would wrap a self-contained executable in a runtime it does not need.
+
 [dependencies]
 jline = "4.4.8"
 
 [test-dependencies]
 junit-jupiter = "6.1.3"
+
+# Null checking: every package is @NullMarked (package-info.java), and NullAway checks it at
+# compile time. The table brings JSpecify, Error Prone and NullAway at versions jk tests together.
+[nullness]
 
 # Test tiers: `jk test` is the fast tier; each profile owns one cost tag, so every tagged
 # test runs in exactly one tier (`jk test -p integration`).
