@@ -25,7 +25,7 @@ jk new -t spring-boot/webapp my-app
 
 Bare `-t <name>` is framework `none` (so `-t cli` → `java/none/cli`). Qualify a framework with
 `-t spring-boot/webapp`. `--lang` defaults to java; a `framework/name` ref walks
-java → kotlin → groovy on a miss. Override the catalog with `[templates] official = "…"` in
+java → kotlin → groovy → scala on a miss. Override the catalog with `[templates] official = "…"` in
 `~/.jk/config.toml`; any template can also be used directly by local path, `owner/repo`, or git URL.
 
 ## Layout
@@ -37,7 +37,7 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
   src/main/g8/            # the templated project tree ($name$, $package$, …)
 ```
 
-`<lang>` is `java`, `kotlin`, or `groovy`. `<framework>` is `none` for unframed templates
+`<lang>` is `java`, `kotlin`, `groovy`, or `scala`. `<framework>` is `none` for unframed templates
 (cli, library, ktor-3) or a plugin table (`spring-boot`, `quarkus`, …).
 
 A template's own questions are `[[ask]]` tables in `.jk-template.toml` (`key`, `label`, `kind` of
@@ -54,10 +54,10 @@ table is in jk's [templates guide](https://github.com/JumpKickOSS/jk/blob/main/d
 
 | Name | Framework | Languages | Description | Rule pack |
 |------|-----------|-----------|-------------|-----------|
-| `app` | none | java, kotlin | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
+| `app` | none | java, kotlin, groovy, scala | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
 | `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
-| `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
+| `library` | none | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin; the Scala one the jar and `git.properties` only, for now), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
