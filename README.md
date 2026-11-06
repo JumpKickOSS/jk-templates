@@ -62,6 +62,7 @@ includes it, the workflow fails at that step.
 | `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
 | `library` | none | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin, scaladoc for Scala), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
+| `plugin` | none | java | Build plugin (`jk new -P`): `jk-plugin.toml` manifest, service file, a `@NullMarked` Plugin class and its test, against the scaffolding jk's SDK | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
