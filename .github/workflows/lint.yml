@@ -1,0 +1,30 @@
+# Runs jk's catalogue lint over every template, the check `jk new` applies when it loads one, so a
+# template the next jk would refuse or leave out of the catalogue cannot merge.
+#
+# `jk template lint` is new: until a jk release includes it, the installed jk does not know the
+# command and this workflow fails.
+name: lint
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  templates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The official installer verifies the release's signature and checksum before it writes
+      # anything; with no JK_VERSION it installs the signed latest release.
+      - name: Install jk
+        run: |
+          set -euo pipefail
+          curl -fsSL https://jumpkick.build/install.sh | bash
+          echo "$HOME/.jk/bin" >> "$GITHUB_PATH"
+
+      - name: Lint every template
+        run: jk template lint .

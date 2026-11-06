@@ -7,7 +7,7 @@ StringTemplate: `$name$`, `$organization$`, `$package$`, `$java$`, and `$jk_vers
 scaffolds, which is what a template's rule pack is pinned to).
 
 **Upstream is `templates/` in the jk repository.** Fix a template there; this catalog mirrors it,
-and `diff -r` between the two must stay empty apart from this README and the LICENSE.
+and `diff -r` between the two must stay empty apart from this README, the LICENSE and `.github/`.
 
 ## Use
 
@@ -49,6 +49,10 @@ naming the property: every `default.properties` entry is jk's own (`name`, `orga
 `package`, `java`, `jk_languages`, `jk_layout`, …), an `[[ask]]`, or listed under
 `internal = [...]`; a `when` names earlier asks only; a default is one of its options. The full
 table is in jk's [templates guide](https://github.com/JumpKickOSS/jk/blob/main/docs/user/templates.md).
+
+`jk template lint .` runs that lint over every template here, and the `lint` workflow runs it on
+every push and pull request. The command is newer than the latest jk release: until a release
+includes it, the workflow fails at that step.
 
 ## Templates
 
