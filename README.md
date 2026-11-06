@@ -14,6 +14,8 @@ and `diff -r` between the two must stay empty apart from this README and the LIC
 ```bash
 jk new -t cli my-tool
 jk new -t cli --lang kotlin my-tool
+jk new -t app my-app
+jk new -t app -p deps=guava -p assembly=true my-app
 jk new -t library my-lib
 jk new -t library --lang kotlin my-lib
 jk new -t ktor-3 my-svc
@@ -30,7 +32,7 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
 
 ```
 <lang>/<framework>/<name>.g8/
-  .jk-template.toml       # language, framework, name, description, layouts
+  .jk-template.toml       # language, framework, name, description, layouts; [[ask]] and internal
   default.properties      # g8 fields + defaults (name, organization, package, java, …)
   src/main/g8/            # the templated project tree ($name$, $package$, …)
 ```
@@ -38,13 +40,24 @@ java → kotlin → groovy on a miss. Override the catalog with `[templates] off
 `<lang>` is `java`, `kotlin`, or `groovy`. `<framework>` is `none` for unframed templates
 (cli, library, ktor-3) or a plugin table (`spring-boot`, `quarkus`, …).
 
+A template's own questions are `[[ask]]` tables in `.jk-template.toml` (`key`, `label`, `kind` of
+`text`, `bool`, `choice` or `multi`, `options`, `default`, `when`, `advanced`); `-p key=value`
+answers one. A `choice` answer also sets `<key>_<option>` to `yes` for the chosen option and
+`no` for the rest, a `multi` the same per selected option, and a `bool` is `yes` or `no`, so the
+templated tree tests `$if(deps_guava.truthy)$`. jk refuses a template that fails the catalogue lint,
+naming the property: every `default.properties` entry is jk's own (`name`, `organization`,
+`package`, `java`, `jk_languages`, `jk_layout`, …), an `[[ask]]`, or listed under
+`internal = [...]`; a `when` names earlier asks only; a default is one of its options. The full
+table is in jk's [templates guide](https://github.com/JumpKickOSS/jk/blob/main/docs/user/templates.md).
+
 ## Templates
 
 | Name | Framework | Languages | Description | Rule pack |
 |------|-----------|-----------|-------------|-----------|
+| `app` | none | java, kotlin | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
 | `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
-| `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package | `library` |
+| `library` | none | java, kotlin | Published library: sources and javadoc jars (Dokka's for Kotlin), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
@@ -88,8 +101,10 @@ are for the extra fields only (`optional`, `features`, `classifier`, `git`, `pat
 
 Change `templates/` in the jk repository; a template must generate a project where `jk build`,
 `jk test` and `jk guard` pass with no manual edits, and keep `default.properties` minimal —
-sensible defaults, no required interaction. Then run `scripts/templates-sync.sh` in jk, which
-mirrors `templates/` here; `--check` names any file that has drifted.
+sensible defaults, no required interaction. jk's engine tests run the catalogue lint over every
+template there, and its slow tier scaffolds each one with its defaults and again with every option
+on. Then run `scripts/templates-sync.sh` in jk, which mirrors `templates/` here; `--check` names any
+file that has drifted.
 
 ## License
 
