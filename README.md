@@ -61,7 +61,7 @@ includes it, the workflow fails at that step.
 | `app` | none | java, kotlin, groovy, scala | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
 | `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
 | `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
-| `library` | none | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin; the Scala one the jar and `git.properties` only, for now), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
+| `library` | none | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin, scaladoc for Scala), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
 | `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
