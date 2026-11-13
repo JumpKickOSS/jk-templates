@@ -1,7 +1,6 @@
-language = "kotlin"
-framework = "none"
+language = "java"
 name = "library"
-description = "Published Kotlin library: sources and Dokka javadoc jars, the library rule pack, a unit test"
+description = "Published library: a @NullMarked API package, the library rule pack, a unit test"
 layouts = ["traditional"]
 
 [[ask]]

@@ -1,5 +1,4 @@
 language = "groovy"
-framework = "none"
 name = "app"
 description = "Blank application: a main class and its test, with the libraries and fat jar you pick"
 layouts = ["traditional", "simple"]

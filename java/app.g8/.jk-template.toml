@@ -1,7 +1,6 @@
-language = "kotlin"
-framework = "none"
+language = "java"
 name = "app"
-description = "Blank application: a main function and its test, with the libraries, fat jar and native binary you pick"
+description = "Blank application: a main class and its test, with the libraries, fat jar and native binary you pick"
 layouts = ["traditional", "simple"]
 
 [[ask]]

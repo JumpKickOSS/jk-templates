@@ -1,5 +1,4 @@
 language = "scala"
-framework = "none"
 name = "library"
 description = "Published library: an API package, the library rule pack, a unit test"
 layouts = ["traditional"]

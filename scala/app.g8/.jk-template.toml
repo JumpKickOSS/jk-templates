@@ -1,5 +1,4 @@
-language = "java"
-framework = "none"
+language = "scala"
 name = "app"
 description = "Blank application: a main class and its test, with the libraries, fat jar and native binary you pick"
 layouts = ["traditional", "simple"]

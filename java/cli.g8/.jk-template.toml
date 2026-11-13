@@ -1,5 +1,4 @@
-language = "kotlin"
-framework = "none"
+language = "java"
 name = "cli"
 description = "Simple executable (Mill SIMPLE layout)"
 layouts = ["traditional", "simple"]

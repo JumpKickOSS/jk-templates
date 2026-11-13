@@ -23,22 +23,24 @@ jk new -t spring-boot/mcp my-mcp
 jk new -t spring-boot/webapp my-app
 ```
 
-Bare `-t <name>` is framework `none` (so `-t cli` → `java/none/cli`). Qualify a framework with
-`-t spring-boot/webapp`. `--lang` defaults to java; a `framework/name` ref walks
+Bare `-t <name>` is the template with no framework (so `-t cli` → `java/cli`); `-t kotlin/cli`
+names the language too. Qualify a framework with `-t spring-boot/webapp`. `--lang` defaults to java; a `framework/name` ref walks
 java → kotlin → groovy → scala on a miss. Override the catalog with `[templates] official = "…"` in
 `~/.jk/config.toml`; any template can also be used directly by local path, `owner/repo`, or git URL.
 
 ## Layout
 
 ```
-<lang>/<framework>/<name>.g8/
-  .jk-template.toml       # language, framework, name, description, layouts; [[ask]] and internal
+<lang>/<name>.g8/             # a template with no framework, id <lang>/<name>
+<lang>/<framework>/<name>.g8/ # a framework's template, id <lang>/<framework>/<name>
+  .jk-template.toml       # language, framework (left out when none), name, description, layouts; [[ask]] and internal
   default.properties      # g8 fields + defaults (name, organization, package, java, …)
   src/main/g8/            # the templated project tree ($name$, $package$, …)
 ```
 
-`<lang>` is `java`, `kotlin`, `groovy`, or `scala`. `<framework>` is `none` for unframed templates
-(cli, library, ktor-3) or a plugin table (`spring-boot`, `quarkus`, …).
+`<lang>` is `java`, `kotlin`, `groovy`, or `scala`. Templates with no framework (cli, library,
+ktor-3) sit directly in their language's directory; `<framework>` is a plugin table (`spring-boot`,
+`quarkus`, …), never a language's name.
 
 A template's own questions are `[[ask]]` tables in `.jk-template.toml` (`key`, `label`, `kind` of
 `text`, `bool`, `choice` or `multi`, `options`, `default`, `when`, `advanced`); `-p key=value`
@@ -58,12 +60,12 @@ includes it, the workflow fails at that step.
 
 | Name | Framework | Languages | Description | Rule pack |
 |------|-----------|-----------|-------------|-----------|
-| `app` | none | java, kotlin, groovy, scala | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
-| `cli` | none | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
-| `cli-native` | none | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
-| `library` | none | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin, scaladoc for Scala), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
-| `plugin` | none | java | Build plugin (`jk new -P`): `jk-plugin.toml` manifest, service file, a `@NullMarked` Plugin class and its test, against the scaffolding jk's SDK | `library` |
-| `ktor-3` | none | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
+| `app` | — | java, kotlin, groovy, scala | Blank application: a main and its test; asks for common libraries, a fat jar and a native binary | `library` |
+| `cli` | — | java, kotlin | Simple executable (Mill SIMPLE layout), unit test | `library` (java), house baseline (kotlin) |
+| `cli-native` | — | java | Interactive Java CLI with JLine (`jk native` ready) | house baseline |
+| `library` | — | java, kotlin, scala | Published library: sources and javadoc jars (Dokka's for Kotlin, scaladoc for Scala), `[build-info]`, unit test; the Java one a `@NullMarked` API package; asks for common libraries | `library` |
+| `plugin` | — | java | Build plugin (`jk new -P`): `jk-plugin.toml` manifest, service file, a `@NullMarked` Plugin class and its test, against the scaffolding jk's SDK | `library` |
+| `ktor-3` | — | kotlin | Ktor service with Koin DI and Exposed/H2 | house baseline |
 | `mcp` | spring-boot | java | Spring Boot MCP server (Spring AI, `@Tool` over SSE) | `spring` |
 | `webapp` | spring-boot | java, kotlin | Spring Boot API + Vite/React SPA in a node `web` module (`node = 24`) jk installs, builds and packages; `jk dev` runs Vite beside the app | `spring`, `monorepo` |
 | `webmvc-security-actuator-jpa-h2` | spring-boot | java, kotlin | Spring Boot WebMVC + JPA/H2 + Actuator | `spring` |
@@ -75,7 +77,7 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
 
 - **`jk-guards.toml`** — house rules run inside `jk build` from the first build. Framework templates
   `[guards] extends` the pack for their framework (`cc.jumpkick.guards:spring`, `library`,
-  `monorepo`, …), and the Java `cli` extends `library`; the other `none` templates carry a small
+  `monorepo`, …), and the Java `cli` extends `library`; the other templates with no framework carry a small
   baseline of their own with a `guard-fixtures/` proof. `jk guard explain` lists the rules.
 - **Test tiers** — `[test] exclude-tags` names the cost tags, and one `[profiles.<tag>]` per tag
   runs them, so every tagged test belongs to exactly one tier.
