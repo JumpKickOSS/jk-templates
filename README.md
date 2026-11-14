@@ -79,8 +79,10 @@ Plugin hello-apps (`spring-boot/hello`, `spring-boot/webmvc`, `quarkus/hello`, `
   `[guards] extends` the pack for their framework (`cc.jumpkick.guards:spring`, `library`,
   `monorepo`, …), and the Java `cli` extends `library`; the other templates with no framework carry a small
   baseline of their own with a `guard-fixtures/` proof. `jk guard explain` lists the rules.
-- **Test tiers** — `[test] exclude-tags` names the cost tags, and one `[profiles.<tag>]` per tag
-  runs them, so every tagged test belongs to exactly one tier.
+- **Test tiers** — `@Tag("integration")` tests are the built-in integration suite's (`jk test -s
+  integration`, or `jk test -g` for both), and one `[test.suites.<tag>]` per other cost tag claims
+  the rest, so every tagged test belongs to exactly one tier; plain `jk test` runs what no suite
+  claims.
 - **`[format] style = "standard"`**, and **`[image]`** (a JRE 25 base, `aot-cache = true`) on the
   runnable JVM starters; `cli-native` has none, because its native binary ships as itself.
 - **`[nullness]`** on every Java template: each package it generates is `@NullMarked` in a
