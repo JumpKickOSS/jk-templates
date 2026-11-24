@@ -3,17 +3,17 @@ package $package$;
 import cc.jumpkick.plugin.Plugin;
 import cc.jumpkick.plugin.PluginConfig;
 import cc.jumpkick.plugin.PluginManifest;
+import cc.jumpkick.plugin.ProtocolWriter;
 import cc.jumpkick.plugin.build.BuildPlugin;
 import cc.jumpkick.plugin.build.BuildPluginContext;
 import cc.jumpkick.plugin.build.BuildPluginHarness;
 import cc.jumpkick.plugin.build.PluginCommandSpec;
-import cc.jumpkick.plugin.protocol.ProtocolWriter;
 import java.util.List;
 
 /**
- * The code layer of the {@code [$name$]} plugin. jk forks the jar as a worker, finds this class
- * through {@code META-INF/services/cc.jumpkick.plugin.Plugin}, and the SDK's harness answers the
- * protocol. {@link #register} is where the plugin adds its steps, packagers and commands.
+ * The code layer of the {@code [$name$]} plugin. JumpKick forks the jar as a worker, finds this
+ * class through {@code META-INF/services/cc.jumpkick.plugin.Plugin}, and the SDK's harness answers
+ * the protocol. {@link #register} is where the plugin adds its steps, packagers and commands.
  */
 public final class $name;format="Camel"$Plugin implements Plugin, BuildPlugin {
 

@@ -27,11 +27,13 @@ name      = "$name$"
 aot-cache = true
 
 # Null checking: every package is @NullMarked (package-info.java), and NullAway checks it at
-# compile time. The table brings JSpecify, Error Prone and NullAway at versions jk tests together.
+# compile time. The table brings JSpecify, Error Prone and NullAway at versions JumpKick tests
+# together.
 [nullness]
 
 # Tests see every variable of your shell. Uncommented, this keeps them to these names: results
-# stay cached across unrelated variable changes and can be shared, but tests see no other variable.
+# stay cached across unrelated variable changes and, with a cache key seed, can be shared, but
+# tests see no other variable.
 # [env]
 # scope = ["SPRING_*", "<YOURAPP>_*"]
 
